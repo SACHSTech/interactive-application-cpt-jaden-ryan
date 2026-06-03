@@ -5,6 +5,10 @@ import processing.core.PApplet;
  * @author Your Name
  */
 public class Sketch extends PApplet {
+
+    String difficulty = "Easy";
+    int gameState = 0;
+
     public static void main(String[] args) {
         PApplet.main("Sketch");
     }
@@ -22,7 +26,16 @@ public class Sketch extends PApplet {
     @Override
     public void draw() {
 
-        background(30, 30, 30);
+        if (gameState == 0) {
+            drawMenu();
+        }
+        else if (gameState == 1) {
+            drawGame();
+        }
+    }
+
+    public void drawMenu() {
+ background(30, 30, 30);
 
         //  Title
         fill(255, 255, 255);
@@ -48,6 +61,52 @@ public class Sketch extends PApplet {
         text("EASY", 225, 375);
         text("MEDIUM", 400, 375);
         text("HARD", 575, 375);
+
+        textSize(25);
+        text("Selected: " + difficulty, width / 2, 470);
+
+    }
+
+    public void drawGame() {
+
+        background(50);
+
+        fill(255, 255, 255);
+        textSize(40);
+        text("GAME STARTED", width / 2, height / 2);
+
+        textSize(25);
+        text("Difficulty: " + difficulty, width / 2, height / 2 + 50);
+        
+    }
+
+    public void mousePressed() {
+
+        //  Easy 
+        if (mouseX >= 150 && mouseX <= 300 && mouseY >= 350 && mouseY <= 400) {
+
+            difficulty = "Easy";
+        }
+
+        //  Medium
+        if (mouseX >= 325 && mouseX <= 475 && mouseY >= 350 && mouseY <= 400) {
+
+            difficulty = "Medium";
+        }
+
+        //  Hard
+        if (mouseX >= 500 & mouseX <= 650 && mouseY >= 350 && mouseY <= 400) {
+
+            difficulty = "Hard";
+        }
+
+        //  Play Button
+        if (mouseX >= 300 && mouseX <= 500 && mouseY >= 200 && mouseY <= 260) {
+
+            gameState = 1;
+        }
+
+
 
     }
 
