@@ -8,6 +8,12 @@ public class Sketch extends PApplet {
 
     String difficulty = "Easy";
     int gameState = 0;
+    
+    float targetX;
+    float targetY;
+    float targetSize = 60;
+
+    int score = 0;
 
     public static void main(String[] args) {
         PApplet.main("Sketch");
@@ -21,6 +27,8 @@ public class Sketch extends PApplet {
     @Override
     public void setup() {
         textAlign(CENTER, CENTER);
+        targetX = random(100, 700);
+        targetY = random(100, 500); 
     }
 
     @Override
@@ -69,14 +77,19 @@ public class Sketch extends PApplet {
 
     public void drawGame() {
 
-        background(50);
+        background(50); 
 
         fill(255, 255, 255);
-        textSize(40);
-        text("GAME STARTED", width / 2, height / 2);
+        textSize(20);
+        text("Difficulty: " + difficulty, 650, 50);
 
-        textSize(25);
-        text("Difficulty: " + difficulty, width / 2, height / 2 + 50);
+        fill(255, 255, 255);
+        textSize(30);
+        text("Score: " + score, 100, 50);
+
+        //  Target
+        fill(255, 0, 0);
+        ellipse(targetX, targetY, targetSize, targetSize);
         
     }
 
@@ -95,7 +108,7 @@ public class Sketch extends PApplet {
         }
 
         //  Hard
-        if (mouseX >= 500 & mouseX <= 650 && mouseY >= 350 && mouseY <= 400) {
+        if (mouseX >= 500 && mouseX <= 650 && mouseY >= 350 && mouseY <= 400) {
 
             difficulty = "Hard";
         }
@@ -106,6 +119,18 @@ public class Sketch extends PApplet {
             gameState = 1;
         }
 
+        if (gameState == 1) {
+            
+            float distance = dist(mouseX, mouseY, targetX, targetY);
+
+            if (distance < targetSize / 2) {
+
+                score++;
+
+                targetX = random(100, 700);
+                targetY = random(100, 500);
+            }
+        }
 
 
     }
