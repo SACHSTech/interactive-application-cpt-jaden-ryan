@@ -113,6 +113,17 @@ public class Sketch extends PApplet {
             difficulty = "Hard";
         }
 
+        // Size of targets get smaller with difficulty
+        if (difficulty.equals("Easy")) {
+            targetSize = 60;
+        }
+        else if (difficulty.equals("Medium")) {
+            targetSize = 40;
+        }
+        else if (difficulty.equals("Hard")) {
+            targetSize = 25;
+        }
+
         //  Play Button
         if (mouseX >= 300 && mouseX <= 500 && mouseY >= 200 && mouseY <= 260) {
 
