@@ -106,6 +106,8 @@ public class Sketch extends PApplet {
     }
 
     public void mousePressed() {
+        
+        if (gameState == 0) {
 
         //  Easy 
         if (mouseX >= 150 && mouseX <= 300 && mouseY >= 350 && mouseY <= 400) {
@@ -143,6 +145,8 @@ public class Sketch extends PApplet {
             startTime = millis();
         }
 
+        }
+        
         if (gameState == 1) {
             
             float distance = dist(mouseX, mouseY, targetX, targetY);
