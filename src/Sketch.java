@@ -15,6 +15,9 @@ public class Sketch extends PApplet {
 
     int score = 0;
 
+    int startTime;
+    int timeLeft;
+
     public static void main(String[] args) {
         PApplet.main("Sketch");
     }
@@ -87,6 +90,15 @@ public class Sketch extends PApplet {
         textSize(30);
         text("Score: " + score, 100, 50);
 
+        // Timer
+        timeLeft = 30 - (millis() - startTime) / 1000;
+        text("Time: " + timeLeft, 400, 50);
+
+        if (timeLeft <= 0) {
+            gameState = 0;
+            score = 0;
+        }
+
         //  Target
         fill(255, 0, 0);
         ellipse(targetX, targetY, targetSize, targetSize);
@@ -128,6 +140,7 @@ public class Sketch extends PApplet {
         if (mouseX >= 300 && mouseX <= 500 && mouseY >= 200 && mouseY <= 260) {
 
             gameState = 1;
+            startTime = millis();
         }
 
         if (gameState == 1) {
@@ -139,13 +152,10 @@ public class Sketch extends PApplet {
                 score++;
 
                 targetX = random(100, 700);
-                targetY = random(100, 500);
+                targetY = random(100, 500);  
             }
         }
 
-
     }
-
-    /** Additional helper methods below */
 
 }
