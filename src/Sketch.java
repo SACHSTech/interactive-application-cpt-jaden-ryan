@@ -14,6 +14,9 @@ public class Sketch extends PApplet {
     float targetSize = 60;
 
     int score = 0;
+    //new variables to calculate and store accuracy
+    int miss = 0;
+    int accuracy = 0;
 
     int startTime;
     int timeLeft;
@@ -43,10 +46,13 @@ public class Sketch extends PApplet {
         else if (gameState == 1) {
             drawGame();
         }
+        else if (gameState == 2) {
+            drawEndScreen();
+        }
     }
 
     public void drawMenu() {
- background(30, 30, 30);
+        background(30, 30, 30);
 
         //  Title
         fill(255, 255, 255);
@@ -95,8 +101,7 @@ public class Sketch extends PApplet {
         text("Time: " + timeLeft, 400, 50);
 
         if (timeLeft <= 0) {
-            gameState = 0;
-            score = 0;
+            gameState = 2;
         }
 
         //  Target
@@ -104,9 +109,57 @@ public class Sketch extends PApplet {
         ellipse(targetX, targetY, targetSize, targetSize);
         
     }
+    public void drawEndScreen() {
+        background(50);
+
+        // End message
+        fill(255);
+        textSize(50);
+
+        if (score <= 5) {
+            text("Good Try :(", 385, 150);
+        }
+        else if (score <= 15) {
+            text("Keep up the great work!", 385, 150);
+        }
+        else if (score <= 30) {
+            text("Good Job!", 385, 150);
+        }
+        else {
+            text("Aim God!", 385, 150);
+        }
+
+        // Accuracy
+        if (score + miss > 0) {
+            accuracy = (int)((float) score / (score + miss) * 100);
+        } else {
+            accuracy = 0;
+        }
+
+        // Stats
+        textSize(30);
+        text("Score: " + score, 385, 250);
+        text("Accuracy: " + accuracy + "%", 385, 320);
+
+        // Return button
+        fill(100);
+        rect(240, 400, 140, 60);
+
+        fill(255);
+        textSize(25);
+        text("Return", 310, 428);
+
+        // Exit button
+        fill(100);
+        rect(420, 400, 140, 60);
+
+        fill(255);
+        text("Exit", 490, 428);
+    }
 
     public void mousePressed() {
-        
+
+
         if (gameState == 0) {
 
         //  Easy 
@@ -157,6 +210,24 @@ public class Sketch extends PApplet {
 
                 targetX = random(100, 700);
                 targetY = random(100, 500);  
+            } else {
+                miss++;
+            }
+        }
+        //new
+        if (gameState == 2) {
+            if (mouseX >= 240 && mouseX <= 380 && mouseY >= 400 && mouseY <= 460) {
+
+                gameState = 0;
+                score = 0;
+                accuracy = 0;
+                miss = 0;
+            }
+
+            // Exit button
+            if (mouseX >= 420 && mouseX <= 560 && mouseY >= 400 && mouseY <= 460) {
+
+                exit();
             }
         }
 
