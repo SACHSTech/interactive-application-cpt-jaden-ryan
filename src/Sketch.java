@@ -87,7 +87,7 @@ public class Sketch extends PApplet {
 
         //  Play Button
         fill(0, 200, 0);
-        rect(300, 200, 200, 60, 10);
+        rect(PLAY_BUTTON_X, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT, 10);
 
         fill(255, 255, 255);
         textSize(30);
@@ -95,9 +95,9 @@ public class Sketch extends PApplet {
 
         //  Difficulty
         fill(100);
-        rect(150, 350, 150, 50, 10);
-        rect(325, 350, 150, 50, 10);
-        rect(500, 350, 150, 50, 10);
+        rect(EASY_BUTTON_X, DIFFICULTY_BUTTON_Y, DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT, 10);
+        rect(MEDIUM_BUTTON_X, DIFFICULTY_BUTTON_Y, DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT, 10);
+        rect(HARD_BUTTON_X, DIFFICULTY_BUTTON_Y, DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT, 10);
 
         fill(255, 255, 255);
         textSize(20);
@@ -168,24 +168,24 @@ public class Sketch extends PApplet {
         text("Accuracy: " + accuracy + "%", 385, 320);
 
         // Return button
-        fill(100);
-        rect(240, 400, 140, 60);
+        fill(100, 100, 100);
+        rect(RETURN_BUTTON_X, RETURN_BUTTON_Y, END_BUTTON_WIDTH, END_BUTTON_HEIGHT);
 
-        fill(255);
+        fill(255, 255, 255);
         textSize(25);
         text("Return", 310, 428);
 
         // Exit button
-        fill(100);
-        rect(420, 400, 140, 60);
+        fill(100, 100, 100);
+        rect(EXIT_BUTTON_X, EXIT_BUTTON_Y, END_BUTTON_WIDTH, END_BUTTON_HEIGHT);
 
         fill(255);
-        text("Exit", 490, 428);
+        text("Exit", 490, 430);
     }
 
     public void mousePressed() {
 
-
+        //  Home Screen
         if (gameState == 0) {
 
         //  Easy 
@@ -227,14 +227,17 @@ public class Sketch extends PApplet {
         }
 
         //  Play Button
-        if (mouseX >= 300 && mouseX <= 500 && mouseY >= 200 && mouseY <= 260) {
+        if (mouseX >= PLAY_BUTTON_X &&
+            mouseX <= PLAY_BUTTON_X + PLAY_BUTTON_WIDTH &&
+            mouseY >= PLAY_BUTTON_Y &&
+            mouseY <= PLAY_BUTTON_Y + PLAY_BUTTON_HEIGHT) {
 
-            gameState = 1;
-            startTime = millis();
+                gameState = 1;
+                startTime = millis();
+            }
         }
 
-        }
-        
+        //  Game screen
         if (gameState == 1) {
             
             float distance = dist(mouseX, mouseY, targetX, targetY);
@@ -244,23 +247,31 @@ public class Sketch extends PApplet {
                 score++;
 
                 targetX = random(100, 700);
-                targetY = random(100, 500);  
+                targetY = random(100, 500);     
             } else {
                 miss++;
             }
         }
-        
+
+        //  End Screen
         if (gameState == 2) {
-            if (mouseX >= 240 && mouseX <= 380 && mouseY >= 400 && mouseY <= 460) {
+            if (mouseX >= RETURN_BUTTON_X && 
+                mouseX <= RETURN_BUTTON_X + END_BUTTON_WIDTH &&
+                mouseY >= RETURN_BUTTON_Y &&
+                mouseY <= RETURN_BUTTON_Y + END_BUTTON_HEIGHT) {
 
                 gameState = 0;
                 score = 0;
                 accuracy = 0;
                 miss = 0;
+                startTime = 0;
             }
 
             // Exit button
-            if (mouseX >= 420 && mouseX <= 560 && mouseY >= 400 && mouseY <= 460) {
+            if (mouseX >= EXIT_BUTTON_X && 
+                mouseX <= EXIT_BUTTON_X + END_BUTTON_WIDTH &&
+                mouseY >= EXIT_BUTTON_Y &&
+                mouseY <= EXIT_BUTTON_Y + END_BUTTON_HEIGHT) {
 
                 exit();
             }
