@@ -21,6 +21,32 @@ public class Sketch extends PApplet {
     int startTime;
     int timeLeft;
 
+    //  Difficulty button variables
+    int EASY_BUTTON_X = 150;
+    int MEDIUM_BUTTON_X = 325;
+    int HARD_BUTTON_X = 500;
+
+    int DIFFICULTY_BUTTON_Y = 350;
+    int DIFFICULTY_BUTTON_WIDTH = 150;
+    int DIFFICULTY_BUTTON_HEIGHT = 50;
+    
+    //  Play button variables
+    int PLAY_BUTTON_X = 300;
+    int PLAY_BUTTON_Y = 200;
+    int PLAY_BUTTON_WIDTH = 200;
+    int PLAY_BUTTON_HEIGHT = 60;
+
+    //  End button variables
+    int RETURN_BUTTON_X = 240;
+    int RETURN_BUTTON_Y = 400;
+
+    int EXIT_BUTTON_X = 420;
+    int EXIT_BUTTON_Y = 400;
+
+    int END_BUTTON_WIDTH = 140;
+    int END_BUTTON_HEIGHT = 60;
+
+
     public static void main(String[] args) {
         PApplet.main("Sketch");
     }
@@ -106,7 +132,7 @@ public class Sketch extends PApplet {
 
         //  Target
         fill(255, 0, 0);
-        ellipse(targetX, targetY, targetSize, targetSize);
+        ellipse(targetX, targetY, targetSize, targetSize);  // Target 
         
     }
     public void drawEndScreen() {
@@ -163,19 +189,28 @@ public class Sketch extends PApplet {
         if (gameState == 0) {
 
         //  Easy 
-        if (mouseX >= 150 && mouseX <= 300 && mouseY >= 350 && mouseY <= 400) {
+        if (mouseX >= EASY_BUTTON_X && 
+            mouseX <= EASY_BUTTON_X + DIFFICULTY_BUTTON_WIDTH && 
+            mouseY >= DIFFICULTY_BUTTON_Y && 
+            mouseY <= DIFFICULTY_BUTTON_Y + DIFFICULTY_BUTTON_HEIGHT ) {
 
             difficulty = "Easy";
         }
 
         //  Medium
-        if (mouseX >= 325 && mouseX <= 475 && mouseY >= 350 && mouseY <= 400) {
+        if (mouseX >= MEDIUM_BUTTON_X &&
+            mouseX <= MEDIUM_BUTTON_X + DIFFICULTY_BUTTON_WIDTH &&
+            mouseY >= DIFFICULTY_BUTTON_Y &&
+            mouseY <= DIFFICULTY_BUTTON_Y + DIFFICULTY_BUTTON_HEIGHT) {
 
             difficulty = "Medium";
         }
 
-        //  Hard
-        if (mouseX >= 500 && mouseX <= 650 && mouseY >= 350 && mouseY <= 400) {
+        //  Hard 
+        if (mouseX >= HARD_BUTTON_X &&
+            mouseX <= HARD_BUTTON_X + DIFFICULTY_BUTTON_WIDTH &&
+            mouseY >= DIFFICULTY_BUTTON_Y && 
+            mouseY <= DIFFICULTY_BUTTON_Y + DIFFICULTY_BUTTON_HEIGHT) {
 
             difficulty = "Hard";
         }
@@ -214,7 +249,7 @@ public class Sketch extends PApplet {
                 miss++;
             }
         }
-        //new
+        
         if (gameState == 2) {
             if (mouseX >= 240 && mouseX <= 380 && mouseY >= 400 && mouseY <= 460) {
 
