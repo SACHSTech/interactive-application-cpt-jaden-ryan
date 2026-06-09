@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 
 /**
- * Template for programs with Processing graphics output.
+ * Program that runs an aim trainer with three different difficulties, a 30-second timer, and an end screen that shows accuracy and score.
  * @author Jaden and Ryan
  */
 public class Sketch extends PApplet {
