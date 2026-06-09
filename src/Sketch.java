@@ -2,7 +2,7 @@ import processing.core.PApplet;
 
 /**
  * Template for programs with Processing graphics output.
- * @author Your Name
+ * @author Jaden and Ryan
  */
 public class Sketch extends PApplet {
 
@@ -14,7 +14,7 @@ public class Sketch extends PApplet {
     float targetSize = 60;
 
     int score = 0;
-    //new variables to calculate and store accuracy
+    
     int miss = 0;
     int accuracy = 0;
 
@@ -46,7 +46,7 @@ public class Sketch extends PApplet {
     int END_BUTTON_WIDTH = 140;
     int END_BUTTON_HEIGHT = 60;
 
-    //  Array
+    //  Array of all difficulty buttons
     String[] difficultyNames = {"EASY", "MEDIUM", "HARD"};
 
 
@@ -88,7 +88,7 @@ public class Sketch extends PApplet {
         textSize(50);
         text("AIM TRAINER", width / 2, 100);
 
-        //  Play Button
+        //  Play button
         fill(0, 200, 0);
         rect(PLAY_BUTTON_X, PLAY_BUTTON_Y, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT, 10);
 
@@ -98,9 +98,7 @@ public class Sketch extends PApplet {
 
         //  Difficulty
         fill(100, 100, 100);
-        fill(100, 100, 100);
 
-        
         for (int i = 0; i < difficultyNames.length; i++) {
 
             int x = EASY_BUTTON_X + i * 175;
@@ -137,7 +135,7 @@ public class Sketch extends PApplet {
         textSize(30);
         text("Score: " + score, 100, 50);
 
-        // Timer
+        // Calculates how many seconds are left in the game
         timeLeft = 30 - (millis() - startTime) / 1000;
         text("Time: " + timeLeft, 400, 50);
 
@@ -154,7 +152,7 @@ public class Sketch extends PApplet {
     public void drawEndScreen() {
         background(50);
 
-        // End message
+        //  End message
         fill(255);
         textSize(50);
 
@@ -171,7 +169,7 @@ public class Sketch extends PApplet {
             text("Aim God!", 385, 150);
         }
 
-        // Accuracy
+        //  Accuracy = hits / total clicks x 100
         if (score + miss > 0) {
             accuracy = (int)((float) score / (score + miss) * 100);
         } else {
@@ -255,7 +253,8 @@ public class Sketch extends PApplet {
 
         //  Game screen
         if (gameState == 1) {
-            
+
+            //  Distance from mouse click to target center
             float distance = dist(mouseX, mouseY, targetX, targetY);
 
             if (distance < targetSize / 2) {
