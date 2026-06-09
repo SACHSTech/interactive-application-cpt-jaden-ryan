@@ -46,6 +46,9 @@ public class Sketch extends PApplet {
     int END_BUTTON_WIDTH = 140;
     int END_BUTTON_HEIGHT = 60;
 
+    //  Array
+    String[] difficultyNames = {"EASY", "MEDIUM", "HARD"};
+
 
     public static void main(String[] args) {
         PApplet.main("Sketch");
@@ -94,16 +97,28 @@ public class Sketch extends PApplet {
         text("PLAY", 400, 230);
 
         //  Difficulty
-        fill(100);
-        rect(EASY_BUTTON_X, DIFFICULTY_BUTTON_Y, DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT, 10);
-        rect(MEDIUM_BUTTON_X, DIFFICULTY_BUTTON_Y, DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT, 10);
-        rect(HARD_BUTTON_X, DIFFICULTY_BUTTON_Y, DIFFICULTY_BUTTON_WIDTH, DIFFICULTY_BUTTON_HEIGHT, 10);
+        fill(100, 100, 100);
+        fill(100, 100, 100);
 
-        fill(255, 255, 255);
-        textSize(20);
-        text("EASY", 225, 375);
-        text("MEDIUM", 400, 375);
-        text("HARD", 575, 375);
+        
+        for (int i = 0; i < difficultyNames.length; i++) {
+
+            int x = EASY_BUTTON_X + i * 175;
+
+            rect(x,
+                DIFFICULTY_BUTTON_Y,
+                DIFFICULTY_BUTTON_WIDTH,
+                DIFFICULTY_BUTTON_HEIGHT,
+                10);
+
+            fill(255, 255, 255);
+            textSize(20);
+            text(difficultyNames[i],
+                x + DIFFICULTY_BUTTON_WIDTH / 2,
+                DIFFICULTY_BUTTON_Y + DIFFICULTY_BUTTON_HEIGHT / 2);
+
+            fill(100);
+        }
 
         textSize(25);
         text("Selected: " + difficulty, width / 2, 470);
@@ -135,6 +150,7 @@ public class Sketch extends PApplet {
         ellipse(targetX, targetY, targetSize, targetSize);  // Target 
         
     }
+    
     public void drawEndScreen() {
         background(50);
 
@@ -276,7 +292,5 @@ public class Sketch extends PApplet {
                 exit();
             }
         }
-
     }
-
 }
